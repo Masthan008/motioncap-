@@ -1,0 +1,43 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+
+    <!-- Neon Cyan-Violet Gradient -->
+    <linearGradient id="neonGrad" x1="60" y1="60" x2="452" y2="452" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="50%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#A855F7" />
+    </linearGradient>
+
+    <!-- Subtle Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Container Squircle -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" stroke="#1E293B" stroke-width="4" />
+
+  <!-- Motion Wings forming 'M' -->
+  <g filter="url(#glow)">
+    <!-- Left Wing -->
+    <path d="M128 360 C128 220, 160 140, 208 140 C236 140, 244 190, 256 240 C220 230, 172 260, 160 360 Z" fill="url(#neonGrad)" opacity="0.9" />
+    <path d="M104 350 C104 200, 148 116, 208 116 C232 116, 248 148, 256 190 C224 180, 156 210, 136 350 Z" stroke="url(#neonGrad)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.6" />
+
+    <!-- Right Wing -->
+    <path d="M384 360 C384 220, 352 140, 304 140 C276 140, 268 190, 256 240 C292 230, 340 260, 352 360 Z" fill="url(#neonGrad)" opacity="0.9" />
+    <path d="M408 350 C408 200, 364 116, 304 116 C280 116, 264 148, 256 190 C288 180, 356 210, 376 350 Z" stroke="url(#neonGrad)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.6" />
+
+    <!-- Central Camera Aperture -->
+    <circle cx="256" cy="256" r="64" stroke="url(#neonGrad)" stroke-width="8" fill="#090D16" />
+    <circle cx="256" cy="256" r="22" fill="url(#neonGrad)" />
+
+    <!-- Aperture Blades -->
+    <path d="M256 192 L280 232 M256 320 L232 280 M192 256 L232 280 M320 256 L280 232" stroke="url(#neonGrad)" stroke-width="4" stroke-linecap="round" />
+  </g>
+</svg>
