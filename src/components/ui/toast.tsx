@@ -46,7 +46,7 @@ function notify(title: ReactNode, options: Options = {}, variant: Variant = "def
 						onPress: () => {
 							const copyPromise = (async () => {
 								try {
-									if (window.electronAPI?.copyToClipboard) {
+									if (typeof window !== "undefined" && window.electronAPI?.copyToClipboard) {
 										const ok = await window.electronAPI.copyToClipboard(errorText);
 										if (ok) return true;
 									}

@@ -371,12 +371,12 @@ describe("ModernVideoExporter native static-layout eligibility", () => {
 		electronAPI.getAssetBasePath = vi.fn(async () => "file:///C:/MotionCap/resources/");
 		electronAPI.listAssetDirectory = vi.fn(async () => ({
 			success: true,
-			files: ["tahoe-light.jpg"],
+			files: ["motioncap-cyberflow.jpg"],
 		}));
 
 		await expect(exporter.resolveNativeStaticLayoutBackground()).resolves.toEqual({
 			backgroundColor: "#101010",
-			backgroundImagePath: "C:/MotionCap/resources/wallpapers/tahoe-light.jpg",
+			backgroundImagePath: "C:/MotionCap/resources/wallpapers/motioncap-cyberflow.jpg",
 		});
 	});
 

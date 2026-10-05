@@ -17,11 +17,11 @@ describe("wallpapers", () => {
 	});
 
 	it("keeps the curated wallpaper list and default path aligned", () => {
-		expect(DEFAULT_WALLPAPER_PATH).toBe("/wallpapers/tahoe-light.jpg");
-		expect(DEFAULT_WALLPAPER_RELATIVE_PATH).toBe("wallpapers/tahoe-light.jpg");
+		expect(DEFAULT_WALLPAPER_PATH).toBe("/wallpapers/motioncap-cyberflow.jpg");
+		expect(DEFAULT_WALLPAPER_RELATIVE_PATH).toBe("wallpapers/motioncap-cyberflow.jpg");
 		expect(BUILT_IN_WALLPAPERS.at(0)?.publicPath).toBe(DEFAULT_WALLPAPER_PATH);
-		expect(BUILT_IN_WALLPAPERS.at(1)?.publicPath).toBe("/wallpapers/tahoe-dark.jpg");
-		expect(BUILT_IN_WALLPAPERS).toHaveLength(25);
+		expect(BUILT_IN_WALLPAPERS.at(1)?.publicPath).toBe("/wallpapers/motioncap-solarhorizon.jpg");
+		expect(BUILT_IN_WALLPAPERS).toHaveLength(27);
 	});
 
 	it("preserves the curated order when asset discovery returns extra files", async () => {
@@ -43,12 +43,12 @@ describe("wallpapers", () => {
 		});
 
 		await expect(getAvailableWallpapers()).resolves.toEqual([
-			BUILT_IN_WALLPAPERS[2],
 			BUILT_IN_WALLPAPERS[4],
-			BUILT_IN_WALLPAPERS[15],
-			BUILT_IN_WALLPAPERS[16],
-			BUILT_IN_WALLPAPERS[23],
-			BUILT_IN_WALLPAPERS[24],
+			BUILT_IN_WALLPAPERS[6],
+			BUILT_IN_WALLPAPERS[17],
+			BUILT_IN_WALLPAPERS[18],
+			BUILT_IN_WALLPAPERS[25],
+			BUILT_IN_WALLPAPERS[26],
 		]);
 	});
 

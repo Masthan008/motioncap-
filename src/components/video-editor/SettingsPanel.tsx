@@ -1959,6 +1959,59 @@ export function SettingsPanel({
 						))}
 					</ChoiceGroup>
 				</div>
+				<div className="flex flex-col gap-1.5 pt-1">
+					<div className="flex items-center justify-between">
+						<Label className="text-xs text-muted-foreground">
+							{tSettings("effects.aspectRatio", "Aspect Ratio & Social Preset")}
+						</Label>
+						{aspectRatio === "9:16" && (
+							<span className="text-[10px] font-semibold text-cyan-400 bg-cyan-950/60 border border-cyan-800/40 px-1.5 py-0.5 rounded-full">
+								Reels / TikTok
+							</span>
+						)}
+						{aspectRatio === "1:1" && (
+							<span className="text-[10px] font-semibold text-violet-400 bg-violet-950/60 border border-violet-800/40 px-1.5 py-0.5 rounded-full">
+								LinkedIn / Square
+							</span>
+						)}
+						{aspectRatio === "16:9" && (
+							<span className="text-[10px] font-semibold text-muted-foreground/80 bg-surface-secondary px-1.5 py-0.5 rounded-full">
+								YouTube / Desktop
+							</span>
+						)}
+					</div>
+					<ChoiceGroup
+						type="single"
+						value={aspectRatio}
+						onValueChange={(val) => {
+							if (val && onAspectRatioChange) {
+								onAspectRatioChange(val as AspectRatio);
+								if (val === "9:16" && onAutoReframe916Change) {
+									onAutoReframe916Change(true);
+								}
+							}
+						}}
+						className="grid grid-cols-4 gap-1.5"
+						aria-label={tSettings("effects.aspectRatio", "Aspect Ratio & Social Preset")}
+					>
+						{[
+							{ id: "16:9", label: "16:9", desc: "YouTube" },
+							{ id: "9:16", label: "9:16", desc: "Reels" },
+							{ id: "1:1", label: "1:1", desc: "Square" },
+							{ id: "native", label: "Native", desc: "Original" },
+						].map((item) => (
+							<ChoiceItem
+								key={item.id}
+								value={item.id}
+								className="h-10 text-xs justify-center flex-col gap-0.5"
+								title={`${item.label} (${item.desc})`}
+							>
+								<span className="font-semibold leading-tight">{item.label}</span>
+								<span className="text-[9px] opacity-70 leading-tight">{item.desc}</span>
+							</ChoiceItem>
+						))}
+					</ChoiceGroup>
+				</div>
 				<div className="flex flex-col gap-3 pt-0.5">
 					{advanced && (
 						<div className="flex items-center justify-between gap-3">

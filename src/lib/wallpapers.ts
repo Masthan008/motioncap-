@@ -9,6 +9,8 @@ const IMAGE_FILE_PATTERN = /\.(avif|gif|jpe?g|png|svg|webp)$/i;
 const VIDEO_FILE_PATTERN = /\.(avi|m4v|mkv|mov|mp4|webm)$/i;
 
 export const BUILT_IN_WALLPAPERS: BuiltInWallpaper[] = [
+	createWallpaperEntry("motioncap-cyberflow.jpg", "Cyber Flow (MotionCap)"),
+	createWallpaperEntry("motioncap-solarhorizon.jpg", "Solar Horizon (MotionCap)"),
 	createWallpaperEntry("tahoe-light.jpg", "Tahoe Light"),
 	createWallpaperEntry("tahoe-dark.jpg", "Tahoe Dark"),
 	createWallpaperEntry("midnight-8.jpg", "Midnight 8"),
@@ -40,8 +42,8 @@ export const WALLPAPER_PATHS = BUILT_IN_WALLPAPERS.map((wallpaper) => wallpaper.
 export const WALLPAPER_RELATIVE_PATHS = BUILT_IN_WALLPAPERS.map(
 	(wallpaper) => wallpaper.relativePath,
 );
-export const DEFAULT_WALLPAPER_PATH = "/wallpapers/tahoe-light.jpg";
-export const DEFAULT_WALLPAPER_RELATIVE_PATH = "wallpapers/tahoe-light.jpg";
+export const DEFAULT_WALLPAPER_PATH = "/wallpapers/motioncap-cyberflow.jpg";
+export const DEFAULT_WALLPAPER_RELATIVE_PATH = "wallpapers/motioncap-cyberflow.jpg";
 
 function safeDecodeFileName(fileName: string) {
 	try {

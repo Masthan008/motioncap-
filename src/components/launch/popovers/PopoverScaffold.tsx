@@ -37,14 +37,18 @@ export function DropdownItem({
 		</>
 	);
 	return selected === undefined ? (
-		<Button variant="ghost" className="w-full justify-start gap-3" onClick={onClick}>
+		<Button
+			variant="ghost"
+			className="w-full justify-start gap-3 text-slate-800 hover:bg-slate-900/5 hover:text-slate-900"
+			onClick={onClick}
+		>
 			{content}
 		</Button>
 	) : (
 		<ToggleButton
 			variant="ghost"
 			isSelected={selected}
-			className="w-full justify-start gap-3"
+			className="w-full justify-start gap-3 text-slate-800 hover:bg-slate-900/5 hover:text-slate-900 data-[selected=true]:bg-violet-500/10 data-[selected=true]:text-violet-700"
 			onClick={onClick}
 		>
 			{content}
@@ -70,14 +74,14 @@ export function MicDeviceRow({
 		<ToggleButton
 			variant="ghost"
 			isSelected={selected}
-			className="w-full justify-start gap-3"
+			className="w-full justify-start gap-3 text-slate-800 hover:bg-slate-900/5 hover:text-slate-900 data-[selected=true]:bg-violet-500/10 data-[selected=true]:text-violet-700"
 			onClick={onSelect}
 		>
 			<span className="shrink-0">
 				{selected ? (
-					<MicrophoneIcon weight="fill" size={16} />
+					<MicrophoneIcon weight="fill" size={16} className="text-violet-600" />
 				) : (
-					<MicrophoneSlashIcon size={16} />
+					<MicrophoneSlashIcon size={16} className="text-slate-500" />
 				)}
 			</span>
 			<span className="truncate flex-1">{device.label}</span>

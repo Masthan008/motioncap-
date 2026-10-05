@@ -1,3 +1,4 @@
+import path from "node:path";
 import { expect, it, vi } from "vitest";
 import { trashLibraryProjects } from "./trashProjects";
 it("rejects paths outside the project library before touching files", async () => {
@@ -25,10 +26,10 @@ it("trashes only selected project files, deduplicates paths, and reports partial
 			thumbnailPath: (p) => p + ".missing.png",
 		},
 	);
-	expect(result.deleted).toEqual(["/private/tmp/a.motioncap"]);
+	expect(result.deleted).toEqual([path.resolve("/private/tmp/a.motioncap")]);
 	expect(result.errors).toEqual(["Could not trash b.motioncap"]);
 	expect(trash.mock.calls.map(([p]) => p)).toEqual([
-		"/private/tmp/a.motioncap",
-		"/private/tmp/b.motioncap",
+		path.resolve("/private/tmp/a.motioncap"),
+		path.resolve("/private/tmp/b.motioncap"),
 	]);
 });

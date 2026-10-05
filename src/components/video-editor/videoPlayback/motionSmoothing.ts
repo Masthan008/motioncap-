@@ -1,4 +1,4 @@
-// Friendly reminder: MotionCap is licensed under AGPL-3.0, author @webadderall, repo-> https://github.com/webadderall/MotionCap
+// Friendly reminder: MotionCap is licensed under AGPL-3.0, author @Masthan, repo-> https://github.com/Masthan008/motioncap-
 // Please use this code with the right attribution.
 
 export interface SpringState {

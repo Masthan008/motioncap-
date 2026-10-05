@@ -119,18 +119,18 @@ export const SourceSelectorContent = ({
 	return (
 		<div className="flex flex-col">
 			{onOpenRegionSelector ? (
-				<div className="p-2 border-b border-white/10">
+				<div className="p-2 border-b border-[var(--launch-border)]">
 					<button
 						type="button"
 						onClick={onOpenRegionSelector}
-						className="w-full min-h-[40px] px-2.5 py-1.5 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 hover:text-indigo-300 border border-indigo-500/30 flex items-center gap-2.5 transition-all text-left group"
+						className="w-full min-h-[40px] px-2.5 py-1.5 rounded-xl bg-violet-500/10 hover:bg-violet-500/15 text-violet-700 dark:text-violet-400 border border-violet-500/20 flex items-center gap-2.5 transition-all text-left group cursor-pointer"
 					>
-						<div className="w-7 h-7 rounded-md bg-indigo-500/20 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-							<Crop className="w-4 h-4 text-indigo-400" />
+						<div className="w-7 h-7 rounded-lg bg-violet-500/15 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+							<Crop className="w-4 h-4 text-violet-700 dark:text-violet-400" />
 						</div>
 						<div className="flex-1 min-w-0">
-							<div className="text-xs font-semibold text-white">Select Screen Region</div>
-							<div className="text-[10px] text-zinc-400 truncate">
+							<div className="text-xs font-semibold text-[var(--launch-text)]">Select Screen Region</div>
+							<div className="text-[10px] text-[var(--launch-text-muted)] truncate">
 								Interactive marquee & 1080p / 720p / 9:16 presets
 							</div>
 						</div>

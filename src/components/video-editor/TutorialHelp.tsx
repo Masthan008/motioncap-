@@ -2,6 +2,7 @@ import {
 	ArrowRight,
 	Question as HelpCircle,
 	Keyboard,
+	MagicWand,
 	Scissors,
 	GearSix as Settings2,
 } from "@/components/ui/icons";
@@ -21,7 +22,7 @@ import { formatBinding, SHORTCUT_ACTIONS, SHORTCUT_LABELS } from "@/lib/shortcut
 import { formatShortcut } from "@/utils/platformUtils";
 import { toast } from "@/components/ui/toast";
 
-export const MOTIONCAP_ISSUES_URL = "https://github.com/webadderallorg/MotionCap/issues";
+export const MOTIONCAP_ISSUES_URL = "https://github.com/Masthan008/motioncap-/issues";
 const MOTIONCAP_DISCORD_URL = "https://discord.gg/sdv2FBVNgE";
 export const APP_HEADER_ACTION_BUTTON_CLASS =
 	"h-7 px-2 text-xs text-muted-foreground hover:bg-foreground/10 hover:text-foreground transition-all gap-1.5";
@@ -71,6 +72,29 @@ export function DiscordLinkButton() {
 			aria-label={t("common.app.discord", "Join Discord")}
 		>
 			<DiscordIcon className="h-3.5 w-3.5" />
+		</Button>
+	);
+}
+
+export function StudioTourButton({
+	triggerClassName = APP_HEADER_ACTION_BUTTON_CLASS,
+}: {
+	triggerClassName?: string;
+} = {}) {
+	const t = useScopedT("editor");
+
+	return (
+		<Button
+			type="button"
+			variant="ghost"
+			size="sm"
+			onClick={() => window.dispatchEvent(new CustomEvent("motioncap:open-onboarding"))}
+			className={triggerClassName}
+			title={t("tutorial.tourTitle", "Take MotionCap Studio Tour")}
+			aria-label={t("tutorial.tourTitle", "Take MotionCap Studio Tour")}
+		>
+			<MagicWand className="h-3.5 w-3.5 text-cyan-500" />
+			<span>{t("tutorial.tourLabel", "Studio Tour")}</span>
 		</Button>
 	);
 }

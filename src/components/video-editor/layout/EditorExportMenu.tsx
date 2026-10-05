@@ -122,7 +122,7 @@ export function EditorExportMenu(props: Props) {
 				<PopoverTrigger asChild>
 					<Button
 						type="button"
-						className="inline-flex h-9 min-w-[104px] items-center justify-center gap-2 px-4.5"
+						className="inline-flex h-9 min-w-[104px] items-center justify-center gap-2 px-4.5 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-medium shadow-[0_0_18px_-3px_rgba(139,92,246,0.5)] border border-violet-400/30 transition-all duration-200"
 					>
 						<Download className="h-4 w-4" />
 						<span className="text-sm font-semibold tracking-tight">

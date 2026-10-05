@@ -1,17 +1,36 @@
 .launch-theme {
-	--launch-surface: var(--overlay);
-	--launch-panel: var(--surface);
-	--launch-border: var(--border);
-	--launch-border-strong: var(--separator);
-	--launch-text: var(--foreground);
-	--launch-text-muted: var(--muted);
-	--launch-label: var(--muted);
-	--launch-hover: var(--default-hover);
-	--launch-selected: var(--accent-soft);
-	--launch-accent: var(--accent);
-	--launch-accent-soft: var(--accent-soft);
-	--launch-bar-bg: var(--surface);
-	--launch-bar-border: var(--border);
-	--launch-bar-shadow: var(--surface-shadow);
-	color: var(--foreground);
+	/* Light Liquid Glass System Tokens */
+	--foreground: #0f172a;
+	--foreground-rgb: 15, 23, 42;
+	--muted: #64748b;
+	--muted-foreground: #64748b;
+	--surface: rgba(255, 255, 255, 0.9);
+	--surface-foreground: #0f172a;
+	--surface-secondary: rgba(241, 245, 249, 0.85);
+	--surface-hover: rgba(15, 23, 42, 0.05);
+	--overlay: rgba(255, 255, 255, 0.96);
+	--overlay-foreground: #0f172a;
+	--border: rgba(15, 23, 42, 0.08);
+	--field-border: rgba(15, 23, 42, 0.12);
+	--separator: rgba(15, 23, 42, 0.1);
+
+	/* HUD specific tokens */
+	--launch-surface: rgba(255, 255, 255, 0.9);
+	--launch-panel: #ffffff;
+	--launch-border: rgba(255, 255, 255, 0.88);
+	--launch-border-strong: rgba(15, 23, 42, 0.12);
+	--launch-text: #0f172a;
+	--launch-text-muted: #475569;
+	--launch-label: #64748b;
+	--launch-hover: rgba(15, 23, 42, 0.06);
+	--launch-selected: rgba(124, 58, 237, 0.12);
+	--launch-accent: #7c3aed;
+	--launch-accent-soft: rgba(124, 58, 237, 0.12);
+	--launch-bar-bg: rgba(255, 255, 255, 0.82);
+	--launch-bar-border: rgba(255, 255, 255, 0.95);
+	--launch-bar-shadow: 0 20px 48px -10px rgba(15, 23, 42, 0.18), 0 4px 16px -2px rgba(15, 23, 42, 0.08), 0 0 24px -4px rgba(124, 58, 237, 0.15);
+
+	color: #0f172a;
+	color-scheme: light;
 }
+

@@ -19,6 +19,12 @@ const UpdateToastWindow = lazy(() =>
 	})),
 );
 const EditorWindow = lazy(() => import("./components/video-editor/EditorWindow"));
+const SplashScreen = lazy(() => import("./components/splash/SplashScreen"));
+const OnboardingScreen = lazy(() =>
+	import("./components/onboarding/OnboardingScreen").then((module) => ({
+		default: module.OnboardingScreen,
+	})),
+);
 
 export default function App() {
 	const [windowType] = useState(
@@ -76,6 +82,12 @@ export default function App() {
 			break;
 		case "editor":
 			content = <EditorWindow />;
+			break;
+		case "splash":
+			content = <SplashScreen onComplete={() => window.close()} />;
+			break;
+		case "onboarding":
+			content = <OnboardingScreen isOpen={true} onClose={() => window.close()} />;
 			break;
 		default:
 			content = (

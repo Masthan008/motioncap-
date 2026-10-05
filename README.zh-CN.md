@@ -168,7 +168,7 @@ MotionCap 拥有一个社区驱动的扩展系统。任何人都可以构建和�
 
 预构建发布版本请见：
 
-https://github.com/webadderallorg/MotionCap/releases
+https://github.com/Masthan008/motioncap-/releases
 
 ---
 
@@ -201,7 +201,7 @@ sudo apt install build-essential cmake libx11-dev libxtst-dev libxrandr-dev libx
 ### 步骤
 
 ```bash
-git clone https://github.com/webadderallorg/MotionCap.git motioncap
+git clone https://github.com/Masthan008/motioncap-.git motioncap
 cd motioncap
 npm install
 npm run dev
@@ -358,7 +358,7 @@ MotionCap 将平台相关的捕获层与基于渲染器的编辑、导出流程�
 
 问题反馈和功能建议：
 
-https://github.com/webadderallorg/MotionCap/issues
+https://github.com/Masthan008/motioncap-/issues
 
 欢迎提交 Pull Request。
 

@@ -44,6 +44,7 @@ import { WebcamPopover } from "./popovers/WebcamPopover";
 import { RecordingControls } from "./RecordingControls";
 import { InteractiveRegionSelector } from "./InteractiveRegionSelector";
 import { Crop } from "@/components/ui/icons";
+import { LiquidDroplet } from "./LiquidDroplet";
 
 export function LaunchWindow() {
 	return (
@@ -212,16 +213,18 @@ function LaunchWindowContent() {
 		void window.electronAPI.showProjectDashboard();
 	};
 	const homeButton = (
-		<Button
-			variant="ghost"
-			size="icon"
-			iconSize="lg"
-			aria-label={t("recording.home")}
-			title={t("recording.home")}
-			onClick={openHome}
-		>
-			<House weight="fill" className="size-5" />
-		</Button>
+		<LiquidDroplet glow="glass">
+			<Button
+				variant="ghost"
+				size="icon"
+				iconSize="lg"
+				aria-label={t("recording.home")}
+				title={t("recording.home")}
+				onClick={openHome}
+			>
+				<House weight="fill" className="size-5" />
+			</Button>
+		</LiquidDroplet>
 	);
 
 	const recordingControls = (
@@ -242,6 +245,30 @@ function LaunchWindowContent() {
 
 	const idleControls = (
 		<>
+			<LiquidDroplet glow="violet">
+				<div
+					className={`${styles.liquidWatermark} ${styles.electronNoDrag} hidden sm:flex cursor-pointer`}
+					title="MotionCap Studio • Click to open Studio Tour"
+					onClick={() => window.dispatchEvent(new CustomEvent("motioncap:open-onboarding"))}
+					role="button"
+					tabIndex={0}
+					onKeyDown={(e) => {
+						if (e.key === "Enter" || e.key === " ") {
+							window.dispatchEvent(new CustomEvent("motioncap:open-onboarding"));
+						}
+					}}
+				>
+					<div className={styles.watermarkDropletOrb}>
+						<span className={styles.watermarkDropletHighlight} />
+					</div>
+					<div className={styles.watermarkTextGroup}>
+						<span className={styles.watermarkBrand}>MotionCap</span>
+						<span className={styles.watermarkPill}>STUDIO</span>
+					</div>
+				</div>
+			</LiquidDroplet>
+			<Separator orientation="vertical" className="mx-[4px] h-6 self-center hidden sm:block" />
+
 			{platform !== "linux" && (
 				<>
 					<SourcePopover
@@ -250,31 +277,33 @@ function LaunchWindowContent() {
 						onOpenRegionSelector={() => setIsRegionSelectorOpen(true)}
 						onOpen={beginInteractiveHudAction}
 						trigger={
-							<Button
-								variant="ghost"
-								size="lg"
-								className={` ${styles.electronNoDrag} group gap-2 px-3 min-w-0 max-w-[180px] shrink-0  ${openId === "sources" ? "border-[var(--launch-border-strong)] bg-[var(--launch-hover)]" : ""} `}
-								title={selectedSource}
-							>
-								{selectedSource.startsWith("Region (") ? (
-									<Crop className="size-5 shrink-0 text-indigo-400" />
-								) : (
-									<MonitorIcon
-										weight={openId === "sources" ? "fill" : "regular"}
-										size={18}
-										className="size-5 shrink-0"
+							<LiquidDroplet glow="violet">
+								<Button
+									variant="ghost"
+									size="lg"
+									className={` ${styles.electronNoDrag} group gap-2 px-3 min-w-0 max-w-[180px] shrink-0  ${openId === "sources" ? "border-[var(--launch-border-strong)] bg-[var(--launch-hover)]" : ""} `}
+									title={selectedSource}
+								>
+									{selectedSource.startsWith("Region (") ? (
+										<Crop className="size-5 shrink-0 text-violet-600" />
+									) : (
+										<MonitorIcon
+											weight={openId === "sources" ? "fill" : "regular"}
+											size={18}
+											className="size-5 shrink-0 text-slate-800"
+										/>
+									)}
+									<div className="flex-1 min-w-0 overflow-hidden font-medium text-slate-900">
+										<MarqueeText text={selectedSource} />
+									</div>
+									<CaretUpIcon
+										size={10}
+										className={`text-slate-500 ml-0.5 shrink-0 transition-transform duration-200 ${
+											openId === "sources" ? "" : "rotate-180"
+										}`}
 									/>
-								)}
-								<div className="flex-1 min-w-0 overflow-hidden">
-									<MarqueeText text={selectedSource} />
-								</div>
-								<CaretUpIcon
-									size={10}
-									className={`text-[#6b6b78] ml-0.5 shrink-0 transition-transform duration-200 ${
-										openId === "sources" ? "" : "rotate-180"
-									}`}
-								/>
-							</Button>
+								</Button>
+							</LiquidDroplet>
 						}
 					/>
 
@@ -297,27 +326,36 @@ function LaunchWindowContent() {
 					setMicrophoneDeviceId(deviceId === "default" ? undefined : deviceId);
 				}}
 				trigger={
-					<Button
-						variant="ghost"
-						size="icon"
-						iconSize="lg"
-						title={
-							microphoneEnabled
-								? t("recording.disableMicrophone")
-								: t("recording.enableMicrophone")
-						}
-						className={microphoneEnabled ? "text-accent" : ""}
-					>
-						{microphoneEnabled ? (
-							<MicrophoneIcon
-								weight={microphoneEnabled ? "fill" : "regular"}
-								className="size-5"
-								size={18}
-							/>
-						) : (
-							<MicrophoneSlashIcon className="size-5" />
-						)}
-					</Button>
+					<LiquidDroplet glow={microphoneEnabled ? "violet" : "glass"}>
+						<Button
+							variant="ghost"
+							size="icon"
+							iconSize="lg"
+							title={
+								microphoneEnabled
+									? t("recording.disableMicrophone")
+									: t("recording.enableMicrophone")
+							}
+							className={microphoneEnabled ? "text-accent" : ""}
+						>
+							{microphoneEnabled ? (
+								<div className="flex items-center">
+									<MicrophoneIcon
+										weight="fill"
+										className="size-5"
+										size={18}
+									/>
+									<span className={styles.soundwaveContainer}>
+										<span className={styles.soundwaveBar} />
+										<span className={styles.soundwaveBar} />
+										<span className={styles.soundwaveBar} />
+									</span>
+								</div>
+							) : (
+								<MicrophoneSlashIcon className="size-5" />
+							)}
+						</Button>
+					</LiquidDroplet>
 				}
 			/>
 
@@ -341,27 +379,29 @@ function LaunchWindowContent() {
 					setWebcamDeviceId(deviceId);
 				}}
 				trigger={
-					<Button
-						variant="ghost"
-						size="icon"
-						iconSize="lg"
-						title={
-							webcamEnabled
-								? t("recording.disableWebcam")
-								: t("recording.enableWebcam")
-						}
-						className={webcamEnabled ? "text-accent" : ""}
-					>
-						{webcamEnabled ? (
-							<VideoCameraIcon
-								weight={webcamEnabled ? "fill" : "regular"}
-								className="size-5"
-								size={18}
-							/>
-						) : (
-							<VideoCameraSlashIcon className="size-5" />
-						)}
-					</Button>
+					<LiquidDroplet glow={webcamEnabled ? "cyan" : "glass"}>
+						<Button
+							variant="ghost"
+							size="icon"
+							iconSize="lg"
+							title={
+								webcamEnabled
+									? t("recording.disableWebcam")
+									: t("recording.enableWebcam")
+							}
+							className={webcamEnabled ? "text-accent" : ""}
+						>
+							{webcamEnabled ? (
+								<VideoCameraIcon
+									weight={webcamEnabled ? "fill" : "regular"}
+									className="size-5"
+									size={18}
+								/>
+							) : (
+								<VideoCameraSlashIcon className="size-5" />
+							)}
+						</Button>
+					</LiquidDroplet>
 				}
 			/>
 
@@ -369,18 +409,20 @@ function LaunchWindowContent() {
 				countdownDelay={countdownDelay}
 				onSelectDelay={setCountdownDelay}
 				trigger={
-					<Button
-						variant="ghost"
-						size="icon"
-						iconSize="lg"
-						title={t("recording.countdownDelay")}
-						className={countdownDelay > 0 ? "text-accent" : ""}
-					>
-						<TimerIcon
-							weight={openId === "countdown" ? "fill" : "regular"}
-							className="size-5"
-						/>
-					</Button>
+					<LiquidDroplet glow={countdownDelay > 0 ? "violet" : "glass"}>
+						<Button
+							variant="ghost"
+							size="icon"
+							iconSize="lg"
+							title={t("recording.countdownDelay")}
+							className={countdownDelay > 0 ? "text-accent" : ""}
+						>
+							<TimerIcon
+								weight={openId === "countdown" ? "fill" : "regular"}
+								className="size-5"
+							/>
+						</Button>
+					</LiquidDroplet>
 				}
 			/>
 
@@ -388,67 +430,75 @@ function LaunchWindowContent() {
 				autoStopSeconds={autoStopLimitSeconds}
 				onSelectAutoStop={setAutoStopLimitSeconds}
 				trigger={
-					<Button
-						variant="ghost"
-						size="icon"
-						iconSize="lg"
-						title={
-							autoStopLimitSeconds > 0
-								? `${t("recording.autoStopTimer", "Auto-stop timer")}: ${formatAutoStopPresetLabel(autoStopLimitSeconds)}`
-								: t("recording.autoStopTimer", "Auto-stop timer")
-						}
-						className={autoStopLimitSeconds > 0 ? "text-accent" : ""}
-					>
-						<TimerIcon
-							weight={openId === "autoStop" || autoStopLimitSeconds > 0 ? "fill" : "regular"}
-							className="size-5"
-						/>
-					</Button>
+					<LiquidDroplet glow={autoStopLimitSeconds > 0 ? "violet" : "glass"}>
+						<Button
+							variant="ghost"
+							size="icon"
+							iconSize="lg"
+							title={
+								autoStopLimitSeconds > 0
+									? `${t("recording.autoStopTimer", "Auto-stop timer")}: ${formatAutoStopPresetLabel(autoStopLimitSeconds)}`
+									: t("recording.autoStopTimer", "Auto-stop timer")
+							}
+							className={autoStopLimitSeconds > 0 ? "text-accent" : ""}
+						>
+							<TimerIcon
+								weight={openId === "autoStop" || autoStopLimitSeconds > 0 ? "fill" : "regular"}
+								className="size-5"
+							/>
+						</Button>
+					</LiquidDroplet>
 				}
 			/>
 
-			<Button
-				type="button"
-				variant="destructive"
-				size="icon"
-				className={styles.electronNoDrag}
-				onClick={
-					hasSelectedSource || platform === "linux"
-						? toggleRecording
-						: () => {
-								beginInteractiveHudAction();
-								requestOpen("sources");
-							}
-				}
-				disabled={countdownActive}
-				title={t("recording.record")}
-			>
-				<div className={styles.recDot} />
-			</Button>
+			<LiquidDroplet glow="red">
+				<Button
+					type="button"
+					variant="destructive"
+					size="icon"
+					className={`${styles.electronNoDrag} ${styles.liquidRecordButton}`}
+					onClick={
+						hasSelectedSource || platform === "linux"
+							? toggleRecording
+							: () => {
+									beginInteractiveHudAction();
+									requestOpen("sources");
+								}
+					}
+					disabled={countdownActive}
+					title={t("recording.record")}
+				>
+					<div className={styles.recDot} />
+				</Button>
+			</LiquidDroplet>
 
 			<Separator orientation="vertical" className="mx-[5px] h-6 self-center" />
 
 			{homeButton}
 
-			<Button
-				variant="ghost"
-				size="icon"
-				iconSize="lg"
-				onClick={() => window.electronAPI?.hudOverlayHide?.()}
-				title={t("recording.hideHud")}
-			>
-				<MinusIcon className="size-5" />
-			</Button>
+			<LiquidDroplet glow="glass">
+				<Button
+					variant="ghost"
+					size="icon"
+					iconSize="lg"
+					onClick={() => window.electronAPI?.hudOverlayHide?.()}
+					title={t("recording.hideHud")}
+				>
+					<MinusIcon className="size-5" />
+				</Button>
+			</LiquidDroplet>
 
-			<Button
-				variant="ghost"
-				size="icon"
-				iconSize="lg"
-				onClick={() => window.electronAPI?.hudOverlayClose?.()}
-				title={t("recording.closeApp")}
-			>
-				<XIcon className="size-5" />
-			</Button>
+			<LiquidDroplet glow="red">
+				<Button
+					variant="ghost"
+					size="icon"
+					iconSize="lg"
+					onClick={() => window.electronAPI?.hudOverlayClose?.()}
+					title={t("recording.closeApp")}
+				>
+					<XIcon className="size-5" />
+				</Button>
+			</LiquidDroplet>
 		</>
 	);
 
@@ -509,7 +559,7 @@ function LaunchWindowContent() {
 									<DotsThreeVerticalIcon
 										weight="fill"
 										size={18}
-										className="text-[#6b6b78]"
+										className="text-slate-400 hover:text-slate-600 transition-colors"
 									/>
 								</div>
 

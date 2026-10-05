@@ -97,7 +97,11 @@ export function EditorSidebar({
 											? "fill"
 											: "regular"
 									}
-									className="size-5"
+									className={`size-5 transition-transform duration-200 ${
+										!panelContent && activeSection === section.id
+											? "text-accent scale-105 drop-shadow-[0_0_10px_rgba(139,92,246,0.6)]"
+											: ""
+									}`}
 								/>
 							</ToggleButton>
 							<Tooltip.Content placement="right">{section.label}</Tooltip.Content>
@@ -121,7 +125,7 @@ export function EditorSidebar({
 				aria-label={panelContent ? "Clips" : undefined}
 				className="editor-inspector [--text-sm:0.8125rem] [--text-base:0.8125rem] flex w-[320px] min-h-0 flex-col"
 			>
-				<Card className="min-h-0 flex-1 gap-0 overflow-hidden p-0">
+				<Card className="min-h-0 flex-1 gap-0 overflow-hidden p-0 border border-white/[0.08] shadow-2xl backdrop-blur-xl">
 					{panelContent ?? (
 						<>
 							<header className="flex min-h-14 shrink-0 items-center justify-between gap-3 px-5 py-3">

@@ -109,9 +109,21 @@ export function EditorHeader(props: Props) {
 			style={{ WebkitAppRegion: "drag" } as CSSProperties}
 		>
 			<div
-				className={`editor-header-start flex min-w-0 items-center gap-1 ${headerLeftControlsPaddingClass}`}
+				className={`editor-header-start flex min-w-0 items-center gap-1.5 ${headerLeftControlsPaddingClass}`}
 				style={{ WebkitAppRegion: "no-drag" } as CSSProperties}
 			>
+				<div className="flex items-center gap-1.5 pl-2 pr-1 select-none">
+					<span className="size-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4]" />
+					<span className="text-xs font-bold uppercase tracking-wider text-violet-300">
+						MotionCap
+					</span>
+				</div>
+				<span
+					aria-hidden="true"
+					className="mx-1 shrink-0 text-sm font-light text-muted-foreground/30"
+				>
+					|
+				</span>
 				<Button
 					ref={projectBrowserTriggerRef}
 					type="button"

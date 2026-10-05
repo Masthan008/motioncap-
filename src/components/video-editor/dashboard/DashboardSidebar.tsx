@@ -2,7 +2,7 @@ import { FeedbackDialog } from "@/components/feedback/FeedbackDialog";
 import { RecordNewButton } from "./RecordNewButton";
 import { SidebarCards } from "./SidebarCards";
 import { FolderRow } from "./FolderRow";
-import { Cloud, File, GearSix, House, Plus, UserCircle } from "@/components/ui/icons";
+import { Cloud, File, GearSix, House, MagicWand, Plus, UserCircle } from "@/components/ui/icons";
 
 import { Button } from "@/components/ui/button";
 
@@ -137,6 +137,14 @@ export function DashboardSidebar({
 				<div className="space-y-1 pt-6">
 					<SidebarCards />
 					<FeedbackDialog showLabel className={navClass(false)} onSignIn={onSignIn} />
+					<Button
+						variant="ghost"
+						className={navClass(false)}
+						onClick={() => window.dispatchEvent(new CustomEvent("motioncap:open-onboarding"))}
+					>
+						<MagicWand weight="fill" className="size-[18px]" />
+						Studio Tour
+					</Button>
 					<Button
 						variant="ghost"
 						className={navClass(section === "settings")}

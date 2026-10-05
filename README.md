@@ -172,7 +172,7 @@ Browse and install community extensions from the [MotionCap Marketplace](https:/
 
 Prebuilt releases are available at:
 
-https://github.com/webadderallorg/MotionCap/releases
+https://github.com/Masthan008/motioncap-/releases
 
 ---
 
@@ -205,7 +205,7 @@ sudo apt install build-essential cmake libx11-dev libxtst-dev libxrandr-dev libx
 ### Steps
 
 ```bash
-git clone https://github.com/webadderallorg/MotionCap.git motioncap
+git clone https://github.com/Masthan008/motioncap-.git motioncap
 cd motioncap
 npm install
 npm run dev
@@ -362,7 +362,7 @@ See `CONTRIBUTING.md` for guidelines.
 
 Bug reports and feature requests:
 
-https://github.com/webadderallorg/MotionCap/issues
+https://github.com/Masthan008/motioncap-/issues
 
 Pull requests are welcome.
 
