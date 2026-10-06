@@ -21,7 +21,7 @@ describe("wallpapers", () => {
 		expect(DEFAULT_WALLPAPER_RELATIVE_PATH).toBe("wallpapers/motioncap-cyberflow.jpg");
 		expect(BUILT_IN_WALLPAPERS.at(0)?.publicPath).toBe(DEFAULT_WALLPAPER_PATH);
 		expect(BUILT_IN_WALLPAPERS.at(1)?.publicPath).toBe("/wallpapers/motioncap-solarhorizon.jpg");
-		expect(BUILT_IN_WALLPAPERS).toHaveLength(27);
+		expect(BUILT_IN_WALLPAPERS).toHaveLength(37);
 	});
 
 	it("preserves the curated order when asset discovery returns extra files", async () => {
@@ -43,12 +43,12 @@ describe("wallpapers", () => {
 		});
 
 		await expect(getAvailableWallpapers()).resolves.toEqual([
-			BUILT_IN_WALLPAPERS[4],
-			BUILT_IN_WALLPAPERS[6],
-			BUILT_IN_WALLPAPERS[17],
-			BUILT_IN_WALLPAPERS[18],
-			BUILT_IN_WALLPAPERS[25],
-			BUILT_IN_WALLPAPERS[26],
+			BUILT_IN_WALLPAPERS[14],
+			BUILT_IN_WALLPAPERS[16],
+			BUILT_IN_WALLPAPERS[27],
+			BUILT_IN_WALLPAPERS[28],
+			BUILT_IN_WALLPAPERS[35],
+			BUILT_IN_WALLPAPERS[36],
 		]);
 	});
 

@@ -52,8 +52,8 @@
   "publish": [
     {
       "provider": "github",
-      "owner": "webadderall",
-      "repo": "MotionCap",
+      "owner": "Masthan008",
+      "repo": "motioncap-",
       "tagNamePrefix": "v",
       "publishAutoUpdate": true
     }
@@ -114,7 +114,8 @@
   },
   "win": {
     "target": [
-      "nsis"
+      "nsis",
+      "dir"
     ],
     "icon": "icons/icons/win/icon.ico",
     "executableName": "MotionCap",

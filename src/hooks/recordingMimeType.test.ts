@@ -7,7 +7,7 @@ import {
 } from "./recordingMimeType";
 
 describe("selectRecordingMimeType", () => {
-	it("keeps browser screen captures in WebM/H.264 when supported", () => {
+	it("prefers WebM/VP9 for crisp UI screen captures when supported", () => {
 		const mimeType = selectRecordingMimeType({
 			isTypeSupported: () => true,
 			canPlayType: (type) => {
@@ -23,7 +23,7 @@ describe("selectRecordingMimeType", () => {
 			},
 		});
 
-		expect(mimeType).toBe("video/webm;codecs=h264");
+		expect(mimeType).toBe("video/webm;codecs=vp9");
 	});
 
 	it("skips recorder-only codecs when playback support is missing", () => {
@@ -43,7 +43,7 @@ describe("selectRecordingMimeType", () => {
 			canPlayType: () => "",
 		});
 
-		expect(mimeType).toBe("video/webm;codecs=h264");
+		expect(mimeType).toBe("video/webm;codecs=av1");
 	});
 
 	it("returns undefined when no preferred mime type is supported", () => {
