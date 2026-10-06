@@ -43,6 +43,7 @@ import { SourcePopover } from "./popovers/SourcePopover";
 import { WebcamPopover } from "./popovers/WebcamPopover";
 import { RecordingControls } from "./RecordingControls";
 import { InteractiveRegionSelector } from "./InteractiveRegionSelector";
+import { LiquidWebcamPreview } from "./LiquidWebcamPreview";
 import { Crop } from "@/components/ui/icons";
 import { LiquidDroplet } from "./LiquidDroplet";
 
@@ -600,29 +601,17 @@ function LaunchWindowContent() {
 							</motion.div>
 						</div>
 						{showRecordingWebcamPreview && (
-							<div
-								ref={recordingWebcamPreviewContainerRef}
-								className={`${styles.recordingWebcamPreview} ${styles.electronNoDrag} pointer-events-auto`}
-								data-hud-interactive
-								title={t("recording.webcam")}
-								style={{
-									transform: `translate(${webcamPreviewOffset.x}px, ${webcamPreviewOffset.y}px)`,
-								}}
-								onMouseEnter={handleHudMouseEnter}
-								onMouseLeave={handleHudMouseLeave}
+							<LiquidWebcamPreview
+								containerRef={recordingWebcamPreviewContainerRef}
+								videoRef={setRecordingWebcamPreviewNode}
+								offset={webcamPreviewOffset}
 								onPointerDown={handleWebcamPreviewPointerDown}
 								onPointerMove={handleWebcamPreviewPointerMove}
 								onPointerUp={handleWebcamPreviewPointerUp}
-								onPointerCancel={handleWebcamPreviewPointerUp}
-							>
-								<video
-									ref={setRecordingWebcamPreviewNode}
-									className={styles.recordingWebcamPreviewVideo}
-									muted
-									playsInline
-									style={{ transform: "scaleX(-1)" }}
-								/>
-							</div>
+								onMouseEnter={handleHudMouseEnter}
+								onMouseLeave={handleHudMouseLeave}
+								onClose={() => setShowFloatingWebcamPreview(false)}
+							/>
 						)}
 					</div>
 				</div>

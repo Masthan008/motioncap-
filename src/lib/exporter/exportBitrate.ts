@@ -35,15 +35,15 @@ export function getEncodingModeBitrateMultiplier(encodingMode: ExportEncodingMod
 export function getSourceQualityBitrate(width: number, height: number): number {
 	const totalPixels = width * height;
 	if (totalPixels <= HD_PIXELS) {
-		return 8_000_000;
+		return 14_000_000;
 	}
 	if (totalPixels <= FULL_HD_PIXELS) {
-		return 12_000_000;
+		return 24_000_000;
 	}
 	if (totalPixels >= UHD_PIXELS) {
-		return 45_000_000;
+		return 75_000_000;
 	}
-	return interpolateBitrate(totalPixels, FULL_HD_PIXELS, UHD_PIXELS, 12_000_000, 45_000_000);
+	return interpolateBitrate(totalPixels, FULL_HD_PIXELS, UHD_PIXELS, 24_000_000, 75_000_000);
 }
 
 function getBaseMp4ExportBitrate(width: number, height: number, quality: ExportQuality): number {
@@ -53,15 +53,15 @@ function getBaseMp4ExportBitrate(width: number, height: number, quality: ExportQ
 
 	const totalPixels = width * height;
 	if (totalPixels <= HD_PIXELS) {
-		return 5_000_000;
+		return 10_000_000;
 	}
 	if (totalPixels <= FULL_HD_PIXELS) {
-		return 8_000_000;
+		return 18_000_000;
 	}
 	if (totalPixels >= UHD_PIXELS) {
-		return 35_000_000;
+		return 65_000_000;
 	}
-	return interpolateBitrate(totalPixels, FULL_HD_PIXELS, UHD_PIXELS, 8_000_000, 35_000_000);
+	return interpolateBitrate(totalPixels, FULL_HD_PIXELS, UHD_PIXELS, 18_000_000, 65_000_000);
 }
 
 function getFrameRateBitrateMultiplier(frameRate: ExportMp4FrameRate): number {

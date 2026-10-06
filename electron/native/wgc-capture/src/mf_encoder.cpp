@@ -16,10 +16,10 @@
 static UINT32 calculateScreenRecordingBitrate(int width, int height, int fps) {
     constexpr uint64_t kFourKPixels = 3840ULL * 2160ULL;
     constexpr uint64_t kQhdPixels = 2560ULL * 1440ULL;
-    constexpr UINT32 kBitrate4K = 45000000;
-    constexpr UINT32 kBitrateQhd = 28000000;
-    constexpr UINT32 kBitrateBase = 18000000;
-    constexpr double kHighFrameRateBoost = 1.35;
+    constexpr UINT32 kBitrate4K = 80000000;
+    constexpr UINT32 kBitrateQhd = 50000000;
+    constexpr UINT32 kBitrateBase = 32000000;
+    constexpr double kHighFrameRateBoost = 1.55;
 
     const uint64_t pixels =
         static_cast<uint64_t>((std::max)(width, 1)) *

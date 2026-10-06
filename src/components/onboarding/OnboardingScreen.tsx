@@ -126,6 +126,18 @@ export function OnboardingScreen({ isOpen, onClose }: OnboardingScreenProps) {
 		};
 	}, []);
 
+	// Close the onboarding on Escape key press
+	useEffect(() => {
+		if (!isOpen) return;
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "Escape") {
+				handleFinish();
+			}
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, [isOpen, handleFinish]);
+
 	if (!isOpen) return null;
 
 	const steps = [
@@ -356,7 +368,14 @@ export function OnboardingScreen({ isOpen, onClose }: OnboardingScreenProps) {
 	const isLastStep = currentStep === steps.length - 1;
 
 	return (
-		<div className={styles.overlay}>
+		<div
+			className={`${styles.overlay} pointer-events-auto`}
+			data-hud-interactive
+			data-onboarding-modal
+			onClick={(e) => {
+				if (e.target === e.currentTarget) handleFinish();
+			}}
+		>
 			<motion.div
 				className={styles.modalCard}
 				initial={{ scale: 0.92, opacity: 0, y: 20 }}

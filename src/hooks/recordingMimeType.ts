@@ -1,9 +1,9 @@
 const RECORDING_MIME_TYPE_PREFERENCES = [
-	"video/webm;codecs=h264",
 	"video/webm;codecs=vp9",
+	"video/webm;codecs=av1",
+	"video/webm;codecs=h264",
 	"video/webm",
 	"video/webm;codecs=vp8",
-	"video/webm;codecs=av1",
 ] as const;
 
 const WEBCAM_RECORDING_MIME_TYPE_PREFERENCES = [

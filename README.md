@@ -42,6 +42,21 @@ Platform notes:
 
 # Core Features
 
+## visionOS Liquid Glass Floating HUD & Physics
+Experience a world-class transparent HUD overlay inspired by visionOS. Featuring fluid surface tension droplet physics, spring micro-interactions, automatic intelligent mouse passthrough, and tactile recording feedback.
+
+## Studio-Grade 4K 60FPS Video & Crisp Text
+Engineered specifically for developer tutorials and product walkthroughs:
+- **Up to 85 Mbps Bitrate Headroom**: Eliminates unsightly compression macroblocking on terminal text and IDE fonts.
+- **Hardware-Accelerated VP9 & H.264 High Profile**: Subpixel rendering and sharp window borders remain pin-sharp even during high-velocity cursor pans and rapid window resizing.
+- **Studio Lossless Mode**: Doubled export bitrates ensuring your uploaded videos look identical to raw source displays.
+
+## visionOS Liquid Glass Studio Webcam
+Transform your presenter feed with next-generation optical glass aesthetics:
+- **Multi-Shape Morphing**: Smooth continuous Squircle, precision 1:1 Circle, ultra-wide Studio Pill capsule, and 4:5 Cinematic portrait framing.
+- **Refractive Specular Edges & Breathing Aura**: Multi-stop refractive border gradient with an audio-reactive breathing rim light.
+- **Floating visionOS Quick Toolbar**: Instant hover controls for switching shapes, size presets (S / M / L), horizontal mirror flipping, and studio color grading filters (Natural, Studio Glow, Vivid, and Monochrome film).
+
 ## Auto-zooms, cursor polish, and styled frames
 MotionCap can automatically emphasize activity with zoom suggestions, smooth cursor movement, add motion effects, and place the final composition inside a styled frame with wallpapers, colors, gradients, blur, padding, and shadows.
 
@@ -49,12 +64,8 @@ MotionCap can automatically emphasize activity with zoom suggestions, smooth cur
   <img src="./docs/media/feature1.gif" width="450" alt="MotionCap cursor and zoom demo video">
 </p>
 
-## Dynamic webcam bubble overlays
-Add webcam footage as an overlay bubble, position it with presets or custom coordinates, mirror it, control shadow and roundness, and optionally make it react to zoom so it stays visually balanced during motion.
-
-<p>
-  <img src="./docs/media/feature2.gif" width="450" alt="MotionCap webcam overlay demo video">
-</p>
+## Signature 8K & 4K Studio Wallpapers
+Includes handcrafted signature wallpapers (**Cyber Flow**, **Solar Horizon**) alongside official 4K Windows 11 and macOS desktop wallpapers, customizable gradient palettes, acrylic blur, and ambient drop shadows.
 
 ## Timeline editing built for demos
 Use drag-and-drop timeline tools for zooms, trims, speed regions, annotations, extra audio regions, and crop-aware edits. Save and reopen work as `.motioncap` project files.
@@ -71,16 +82,38 @@ Browse and install community extensions from the [MotionCap Marketplace](https:/
 
 ---
 
+## Keyboard Shortcuts Quick Reference
+
+| Action | Shortcut (Windows / Linux) | Shortcut (macOS) |
+|---|---|---|
+| **Start / Stop Recording** | `F9` or `Space` (in HUD) | `F9` or `Space` |
+| **Pause / Resume Recording** | `F10` | `F10` |
+| **Re-open Interactive Tour** | `Ctrl + Shift + O` | `⌘ + Shift + O` |
+| **Cycle Wallpaper Presets** | `Ctrl + Shift + W` | `⌘ + Shift + W` |
+| **Toggle Webcam Overlay** | `Ctrl + Shift + C` | `⌘ + Shift + C` |
+| **Split Timeline Clip** | `S` | `S` |
+| **Delete Selected Region** | `Delete` / `Backspace` | `Delete` |
+
+---
+
 ## All Features
 
-### Recording
+### Recording & Capture Engine
 
-- Record an entire display or a single app window
-- Jump directly from recording into the editor
-- Capture microphone audio and system audio
-- Use native capture backends where supported
-- Resume editing from saved `.motioncap` project files
-- Open existing recordings or existing project files from the app
+- **Native Windows Graphics Capture (WGC)**: Hardware-accelerated desktop capture with zero latency and native WASAPI audio loopback.
+- **macOS ScreenCaptureKit**: Ultra-smooth 60 FPS system capture with discrete application audio isolation.
+- **Studio Bitrate Pipeline**: 30–85 Mbps recording and export profiles targeting high-density Retina and 4K displays.
+- **Interactive Region Selector**: Pixel-accurate crosshair bounding box selection with magnification loupe.
+- Record an entire display or a single app window.
+- Resume editing from saved `.motioncap` project files.
+
+### visionOS Studio Webcam
+
+- Floating visionOS liquid glass aesthetic with optical specular borders.
+- 4 morphing shapes: Squircle, Circle, Studio Pill capsule, 4:5 Cinematic.
+- 3 size tiers: Small (compact), Medium (studio standard), Large (prominent).
+- Instant mirror flipping and studio color grading presets.
+- Full drag-and-drop positioning with boundary snap and viewport clamping.
 
 ### Timeline and Editing
 
@@ -105,21 +138,10 @@ Browse and install community extensions from the [MotionCap Marketplace](https:/
 - Cursor loop mode for cleaner looping exports
 - macOS-style cursor assets for the rendered overlay
 
-### Webcam Overlay
-
-- Enable or disable webcam overlay footage
-- Upload, replace, or remove webcam footage
-- Mirror webcam footage
-- Size control
-- Preset positions and custom X/Y placement
-- Margin control
-- Roundness control
-- Shadow control
-- Optional zoom-reactive webcam scaling
-
 ### Frame Styling and Backgrounds
 
-- Built-in wallpapers
+- Signature 8K Wallpapers (Cyber Flow, Solar Horizon)
+- 10+ Official 4K Windows 11 & macOS wallpapers
 - Runtime wallpaper discovery from the wallpapers directory
 - Custom uploaded backgrounds
 - Solid color backgrounds
@@ -132,22 +154,18 @@ Browse and install community extensions from the [MotionCap Marketplace](https:/
 
 ### Export
 
-- MP4 export
-- GIF export
-- Export quality selection
-- GIF frame-rate selection
-- GIF loop toggle
-- GIF size presets
+- MP4 export with hardware-tuned bitrates (up to 75 Mbps for 4K)
+- GIF export with customizable frame-rate and looping
+- Studio Lossless quality preset
 - Aspect ratio and output dimension controls
 - Reveal exported files in the system file manager
 
 ### Workflow and Usability
 
-- Customizable keyboard shortcuts
-- In-app shortcut reference
+- 4-Step Interactive Onboarding Tour with live microphone audio meter
+- Customizable keyboard shortcuts with in-app reference
 - Feedback and issue links from the editor
 - Project persistence for editor preferences
-- Faster preview recovery after export
 ---
 
 # Screenshots
