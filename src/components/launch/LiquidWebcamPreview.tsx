@@ -23,8 +23,8 @@ interface LiquidWebcamPreviewProps {
 	onPointerDown: (e: PointerEvent<HTMLDivElement>) => void;
 	onPointerMove: (e: PointerEvent<HTMLDivElement>) => void;
 	onPointerUp: (e: PointerEvent<HTMLDivElement>) => void;
-	onMouseEnter?: () => void;
-	onMouseLeave?: () => void;
+	onMouseEnter?: (e: React.MouseEvent<HTMLDivElement>) => void;
+	onMouseLeave?: (e: React.MouseEvent<HTMLDivElement>) => void;
 	onClose?: () => void;
 }
 
