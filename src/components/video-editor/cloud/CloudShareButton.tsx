@@ -14,7 +14,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const DEFAULT_CLOUD_ENDPOINT = "http://localhost:8787/api/upload";
+import { QrCodeView } from "./QrCodeView";
+
+const DEFAULT_CLOUD_ENDPOINT =
+	(import.meta.env.VITE_CATALYST_API_URL as string | undefined) ||
+	"https://project-rainfall-60091711787.development.catalystserverless.in/server/motioncap_share/api/upload";
 
 type Props = {
  projectPath?: string | null;
@@ -200,6 +204,17 @@ export function CloudShareButton({
 									{copied ? t("editor.cloud.copied") : t("editor.cloud.copy")}
 								</Button>
 							</div>
+
+							<div className="flex flex-col items-center justify-center p-3 rounded-xl border border-foreground/10 bg-foreground/5 text-center">
+								<p className="text-xs font-semibold text-muted-foreground mb-2 flex items-center gap-1.5">
+									<span>📱 Scan on Mobile • AICTE EXPO Live Showcase</span>
+								</p>
+								<QrCodeView value={shareUrl} size={150} />
+								<p className="text-[11px] text-muted-foreground mt-2">
+									Hosted on Zoho Catalyst Cloud
+								</p>
+							</div>
+
 							<Button
 								type="button"
 								variant="outline"

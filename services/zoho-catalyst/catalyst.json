@@ -1,0 +1,14 @@
+{
+  "functions": {
+    "source": "functions",
+    "targets": [
+      "motioncap_share"
+    ],
+    "ignore": []
+  },
+  "client": {
+    "source": "client",
+    "ignore": [],
+    "scripts": {}
+  }
+}

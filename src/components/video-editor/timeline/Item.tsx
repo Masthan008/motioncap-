@@ -283,6 +283,9 @@ export default function Item({
 					: undefined
 			}
 			onPointerDownCapture={handleSelect}
+			onClick={(event) => {
+				event.stopPropagation();
+			}}
 			onDoubleClick={(event) => {
 				if (!onDoubleClick) return;
 				event.stopPropagation();

@@ -1,0 +1,13 @@
+{
+  "name": "motioncap_share",
+  "version": "1.0.0",
+  "description": "Zoho Catalyst backend function for MotionCap video sharing and cloud hosting",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "zcatalyst-sdk-node": "^1.1.0"
+  }
+}

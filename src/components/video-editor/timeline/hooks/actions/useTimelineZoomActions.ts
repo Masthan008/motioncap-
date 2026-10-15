@@ -79,49 +79,27 @@ export function useTimelineZoomActions({
 				}
 			}
 
-			// 2. If startPos is inside an existing zoom region, try placing right after it
+			// 2. If startPos is inside an existing zoom region, try placing right after it (if nearby)
 			const overlappingRegion = sorted.find(
 				(region) => startPos >= region.startMs && startPos < region.endMs,
 			);
 
-			const candidateStart = overlappingRegion ? overlappingRegion.endMs : startPos;
-			if (candidateStart < activeClip.endMs) {
-				const nextRegion = sorted.find((region) => region.startMs > candidateStart);
-				const gapToNextClipEdge = activeClip.endMs - candidateStart;
-				const gapToNextRegion = nextRegion ? nextRegion.startMs - candidateStart : gapToNextClipEdge;
-				const availableDuration = Math.min(gapToNextClipEdge, gapToNextRegion);
-				if (availableDuration >= MIN_ZOOM_DURATION_MS) {
-					return {
-						start: candidateStart,
-						end: candidateStart + Math.min(defaultDuration, availableDuration),
-						adjusted: true,
-					};
+			if (overlappingRegion) {
+				const candidateStart = overlappingRegion.endMs;
+				// Only nudge forward if the gap starts within 500ms of the requested position
+				if (candidateStart - startPos <= 500 && candidateStart < activeClip.endMs) {
+					const nextRegion = sorted.find((region) => region.startMs > candidateStart);
+					const gapToNextClipEdge = activeClip.endMs - candidateStart;
+					const gapToNextRegion = nextRegion ? nextRegion.startMs - candidateStart : gapToNextClipEdge;
+					const availableDuration = Math.min(gapToNextClipEdge, gapToNextRegion);
+					if (availableDuration >= MIN_ZOOM_DURATION_MS) {
+						return {
+							start: candidateStart,
+							end: candidateStart + Math.min(defaultDuration, availableDuration),
+							adjusted: true,
+						};
+					}
 				}
-			}
-
-			// 3. Check for any open slot elsewhere in the active clip
-			let searchStart = activeClip.startMs;
-			for (const region of sorted) {
-				if (region.endMs <= activeClip.startMs) continue;
-				if (region.startMs >= activeClip.endMs) break;
-
-				const gap = Math.min(region.startMs, activeClip.endMs) - searchStart;
-				if (gap >= MIN_ZOOM_DURATION_MS) {
-					return {
-						start: searchStart,
-						end: searchStart + Math.min(defaultDuration, gap),
-						adjusted: true,
-					};
-				}
-				searchStart = Math.max(searchStart, region.endMs);
-			}
-			const finalGap = activeClip.endMs - searchStart;
-			if (finalGap >= MIN_ZOOM_DURATION_MS) {
-				return {
-					start: searchStart,
-					end: searchStart + Math.min(defaultDuration, finalGap),
-					adjusted: true,
-				};
 			}
 
 			return null;

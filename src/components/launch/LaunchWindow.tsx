@@ -10,6 +10,8 @@ import {
 	TimerIcon,
 	VideoCameraIcon,
 	VideoCameraSlashIcon,
+	EyeIcon,
+	EyeClosedIcon,
 	XIcon,
 } from "@/components/ui/icons";
 import { AnimatePresence, motion } from "motion/react";
@@ -203,6 +205,32 @@ function LaunchWindowContent() {
 			cleanup?.();
 		};
 	}, [syncSelectedSource]);
+
+	const [includeHudInCapture, setIncludeHudInCapture] = useState(false);
+
+	useEffect(() => {
+		let mounted = true;
+		void window.electronAPI?.getHudOverlayCaptureProtection?.().then((res) => {
+			if (mounted && res?.success) {
+				setIncludeHudInCapture(!res.enabled);
+			}
+		});
+		return () => {
+			mounted = false;
+		};
+	}, []);
+
+	const toggleIncludeHud = async () => {
+		const next = !includeHudInCapture;
+		setIncludeHudInCapture(next);
+		// Protection enabled = false means HUD is included in the recorded video (Demo Mode)
+		await window.electronAPI?.setHudOverlayCaptureProtection?.(!next);
+		if (next) {
+			toast.info("Demo Mode ON: HUD will be recorded in video (for tutorials & self-demos)");
+		} else {
+			toast.info("Demo Mode OFF: HUD is hidden from recordings");
+		}
+	};
 
 	const hudStateTransition = {
 		duration: 0.24,
@@ -474,6 +502,27 @@ function LaunchWindowContent() {
 			</LiquidDroplet>
 
 			<Separator orientation="vertical" className="mx-[5px] h-6 self-center" />
+
+			<LiquidDroplet glow={includeHudInCapture ? "cyan" : "glass"}>
+				<Button
+					variant="ghost"
+					size="icon"
+					iconSize="lg"
+					onClick={() => void toggleIncludeHud()}
+					className={includeHudInCapture ? "text-cyan-400" : ""}
+					title={
+						includeHudInCapture
+							? "Demo Mode ON: HUD will be recorded in video"
+							: "Demo Mode OFF: Click to include HUD in recordings (for App Demos & Tutorials)"
+					}
+				>
+					{includeHudInCapture ? (
+						<EyeIcon weight="fill" className="size-5" />
+					) : (
+						<EyeClosedIcon className="size-5" />
+					)}
+				</Button>
+			</LiquidDroplet>
 
 			{homeButton}
 

@@ -609,6 +609,7 @@ const VideoPlayback = forwardRef<VideoPlaybackRef, VideoPlaybackProps>(
 								height: container.clientHeight,
 								backgroundAlpha: 0,
 								antialias: true,
+								preserveDrawingBuffer: true,
 								failIfMajorPerformanceCaveat: false,
 								resolution: window.devicePixelRatio || 1,
 								autoDensity: true,
@@ -1315,12 +1316,6 @@ const VideoPlayback = forwardRef<VideoPlaybackRef, VideoPlaybackProps>(
 				app.ticker.stop();
 				bgVideoRef.current?.pause();
 				webcamVideoRef.current?.pause();
-				layoutVideoContentRef.current?.();
-				const videoTextureSource = videoSpriteRef.current?.texture?.source as
-					| { update?: () => void }
-					| undefined;
-				videoTextureSource?.update?.();
-				app.render();
 				return;
 			}
 
