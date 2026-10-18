@@ -17,6 +17,7 @@ import type { useVideoEditorPresets } from "../presets/useVideoEditorPresets";
 import type { useProjectState } from "../state/useProjectState";
 import { EditorExportMenu } from "./EditorExportMenu";
 import { EditorPresetMenu } from "./EditorPresetMenu";
+import { AppUpdateIndicator } from "./AppUpdateIndicator";
 import type { ChapterMarker } from "../types";
 
 // Keep the preset implementation available for future use.
@@ -242,6 +243,7 @@ export function EditorHeader(props: Props) {
 					</Button>
 				</div>
 				{SHOW_PRESETS_BUTTON && <EditorPresetMenu t={t} presets={presets} />}
+				<AppUpdateIndicator />
 				<FeedbackDialog />
 				<EditorExportMenu
 					t={t}

@@ -66,43 +66,23 @@ export function useTimelineZoomActions({
 			const isDirectlyOverlapping = sorted.some(
 				(region) => startPos >= region.startMs && startPos < region.endMs,
 			);
-			if (!isDirectlyOverlapping) {
-				const nextRegion = sorted.find((region) => region.startMs > startPos);
-				const gapToNextClipEdge = activeClip.endMs - startPos;
-				const gapToNextRegion = nextRegion ? nextRegion.startMs - startPos : gapToNextClipEdge;
-				const availableDuration = Math.min(gapToNextClipEdge, gapToNextRegion);
-				if (availableDuration >= MIN_ZOOM_DURATION_MS) {
-					return {
-						start: startPos,
-						end: startPos + Math.min(defaultDuration, availableDuration),
-					};
-				}
+			if (isDirectlyOverlapping) {
+				return null;
 			}
 
-			// 2. If startPos is inside an existing zoom region, try placing right after it (if nearby)
-			const overlappingRegion = sorted.find(
-				(region) => startPos >= region.startMs && startPos < region.endMs,
-			);
-
-			if (overlappingRegion) {
-				const candidateStart = overlappingRegion.endMs;
-				// Only nudge forward if the gap starts within 500ms of the requested position
-				if (candidateStart - startPos <= 500 && candidateStart < activeClip.endMs) {
-					const nextRegion = sorted.find((region) => region.startMs > candidateStart);
-					const gapToNextClipEdge = activeClip.endMs - candidateStart;
-					const gapToNextRegion = nextRegion ? nextRegion.startMs - candidateStart : gapToNextClipEdge;
-					const availableDuration = Math.min(gapToNextClipEdge, gapToNextRegion);
-					if (availableDuration >= MIN_ZOOM_DURATION_MS) {
-						return {
-							start: candidateStart,
-							end: candidateStart + Math.min(defaultDuration, availableDuration),
-							adjusted: true,
-						};
-					}
-				}
+			const nextRegion = sorted.find((region) => region.startMs > startPos);
+			const gapToNextClipEdge = activeClip.endMs - startPos;
+			const gapToNextRegion = nextRegion ? nextRegion.startMs - startPos : gapToNextClipEdge;
+			const availableDuration = Math.min(gapToNextClipEdge, gapToNextRegion);
+			if (availableDuration >= MIN_ZOOM_DURATION_MS) {
+				return {
+					start: startPos,
+					end: startPos + Math.min(defaultDuration, availableDuration),
+				};
 			}
 
 			return null;
+
 		},
 		[videoDuration, totalMs, defaultRegionDurationMs, clipRegions, zoomRegions],
 	);

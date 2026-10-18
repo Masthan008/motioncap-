@@ -1,9 +1,8 @@
-# AICTE EXPO PROJECT PROPOSAL & TECHNICAL DOSSIER
+# MOTIONCAP TECHNICAL DOSSIER & PROBLEM STATEMENT
 
-**Project Title:** MotionCap (Recordly)  
+**Project Title:** MotionCap Studio  
 **Subtitle:** An AI-Accelerated, High-Performance Indigenous Studio Suite for Automated Digital Pedagogy and Technical Knowledge Capture  
-**Category:** Software Systems / Digital Education (EdTech) / Edge AI / Atmanirbhar Bharat  
-**Target Forum:** AICTE National Technical Project Expo / Smart India Innovation Showcase  
+**Category:** Software Systems / Digital Education (EdTech) / Edge AI / Open Source Desktop Studio  
 
 ---
 
@@ -126,7 +125,7 @@ MotionCap resolves these challenges through an integrated, cross-platform archit
 
 ## 4. Comprehensive Comparison Matrix
 
-| Evaluation Parameter | Standard Screen Recorders (OBS / ShareX) | Cloud Recorders (Loom / Vidyard) | Commercial Mac Tools (Screen Studio) | **MotionCap (Recordly)** |
+| Evaluation Parameter | Standard Screen Recorders (OBS / ShareX) | Cloud Recorders (Loom / Vidyard) | Commercial Mac Tools (Screen Studio) | **MotionCap Studio** |
 | :--- | :--- | :--- | :--- | :--- |
 | **Target Audience** | Gamers / Streamers | Corporate Sales / Messaging | Apple Mac Designers | **Educators, Engineers & Developers** |
 | **Automated Pan/Zoom** | ❌ None | ❌ None | ✅ Yes | **✅ Yes (Cursor & Click-Aware Heuristics)** |
@@ -139,7 +138,7 @@ MotionCap resolves these challenges through an integrated, cross-platform archit
 
 ---
 
-## 5. Alignment with AICTE Goals & National Impact
+## 5. Educational Alignment & Global Impact
 
 ### 5.1 Alignment with National Education Policy (NEP 2020)
 - **Pedagogical Digitization:** Under NEP 2020 Section 24, higher education institutions are mandated to build indigenous digital repositories and MOOC courses. MotionCap allows any assistant professor or lab assistant to create international-quality video content using standard lab PCs.
@@ -212,9 +211,9 @@ flowchart TD
 
 ---
 
-## 7. The 60-Second Live Demonstration Protocol (For AICTE Evaluators)
+## 7. The 60-Second Live Demonstration Protocol
 
-When demonstrating MotionCap at the AICTE Expo booth, follow this structured, high-impact demonstration sequence:
+When demonstrating MotionCap Studio, follow this structured, high-impact demonstration sequence:
 
 ```
 [00:00 - 00:15] INITIATION & RECORDING
@@ -230,7 +229,7 @@ When demonstrating MotionCap at the AICTE Expo booth, follow this structured, hi
 
 [00:30 - 00:45] OFFLINE WHISPER AI SUBTITLE GENERATION
 - Click 'Transcribe Audio' in the editor panel.
-- Point out to judges: "Notice our laptop is in Airplane Mode. No internet is connected."
+- Point out: "Notice our laptop is in Airplane Mode. No internet is connected."
 - Within seconds, synchronized, timecoded subtitles appear directly aligned with speech.
 
 [00:45 - 01:00] ONE-CLICK 4K LOSSLESS EXPORT
@@ -267,4 +266,4 @@ When demonstrating MotionCap at the AICTE Expo booth, follow this structured, hi
 
 **MotionCap** addresses a critical pedagogical and technological friction point in technical higher education. By combining deep systems programming (C++, Swift, DirectX, CUDA) with on-device artificial intelligence (Whisper.cpp) and modern graphics engineering (Pixi.js, WebGL), it delivers an indigenous, accessible, and privacy-preserving platform that empowers educators and students to communicate technical knowledge with clarity and impact.
 
-It embodies the true ethos of the **AICTE Project Expo**: solving real educational challenges through high-caliber, independent engineering.
+It solves real educational and content-creation challenges through high-caliber, independent engineering.

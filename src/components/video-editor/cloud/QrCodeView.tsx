@@ -7,7 +7,7 @@ interface QrCodeProps {
 }
 
 /**
- * High-reliability QR Code View for AICTE EXPO
+ * High-reliability QR Code View for MotionCap Cloud Sharing
  * Renders a crisp vector QR code onto an HTML5 Canvas using pure standard algorithms,
  * with an automatic fallback to high-resolution vector representation.
  */

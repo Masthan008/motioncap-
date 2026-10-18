@@ -23,13 +23,18 @@ const nodeRequire = createRequire(import.meta.url);
 const APP_ROOT = path.join(electronWindowsDir, "..");
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 const RENDERER_DIST = path.join(APP_ROOT, "dist");
-const WINDOW_ICON_FILENAME =
-	process.platform === "darwin" ? "motioncapmac-512.png" : "motioncap-512.png";
-const WINDOW_ICON_PATH = path.join(
-	process.env.VITE_PUBLIC || RENDERER_DIST,
-	"app-icons",
-	WINDOW_ICON_FILENAME,
-);
+function getPlatformWindowIconPath(): string {
+	const baseDir = process.env.VITE_PUBLIC || RENDERER_DIST;
+	if (process.platform === "win32") {
+		const icoPath = path.join(baseDir, "app-icons", "motioncap.ico");
+		if (fs.existsSync(icoPath)) return icoPath;
+	}
+	const filename =
+		process.platform === "darwin" ? "motioncapmac-512.png" : "motioncap-512.png";
+	return path.join(baseDir, "app-icons", filename);
+}
+const WINDOW_ICON_PATH = getPlatformWindowIconPath();
+
 
 let hudOverlayWindow: BrowserWindow | null = null;
 let hudOverlayHiddenFromCapture = true;

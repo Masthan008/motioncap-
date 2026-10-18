@@ -207,11 +207,11 @@ export function CloudShareButton({
 
 							<div className="flex flex-col items-center justify-center p-3 rounded-xl border border-foreground/10 bg-foreground/5 text-center">
 								<p className="text-xs font-semibold text-muted-foreground mb-2 flex items-center gap-1.5">
-									<span>📱 Scan on Mobile • AICTE EXPO Live Showcase</span>
+									<span>📱 Scan on Mobile • Instant Cloud Showcase</span>
 								</p>
 								<QrCodeView value={shareUrl} size={150} />
 								<p className="text-[11px] text-muted-foreground mt-2">
-									Hosted on Zoho Catalyst Cloud
+									Powered by MotionCap Cloud
 								</p>
 							</div>
 

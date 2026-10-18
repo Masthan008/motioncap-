@@ -1,6 +1,6 @@
 # MotionCap Zoho Catalyst Cloud Integration
 
-This directory contains the **Zoho Catalyst** serverless backend configuration and Advanced I/O function for **MotionCap / Recordly**.
+This directory contains the serverless backend configuration and Advanced I/O function for **MotionCap**.
 
 With this integration, MotionCap recordings can be uploaded directly to **Zoho Catalyst FileStore**, indexed in **Zoho Catalyst DataStore**, and instantly shared via a high-speed cloud CDN with an interactive web player and mobile QR code.
 
@@ -101,11 +101,11 @@ https://motioncap-xxxxxx.catalystserverless.in/server/motioncap_share/api/upload
 
 ---
 
-## 🏆 Presentation for AICTE EXPO
+## 🏆 Cloud Sharing & Presentation Showcase
 
-During the **AICTE EXPO**:
+Using MotionCap Cloud Sharing:
 1. Record a high-resolution tutorial or presentation in MotionCap.
 2. Edit with smooth cursor spring physics and smart zooms.
-3. Click **Share via Cloud / Zoho Catalyst**.
+3. Click **Share via Cloud**.
 4. The dialog will generate the **Live URL** and a **QR Code**.
-5. Let judges and expo visitors point their smartphone camera at the screen to scan the QR code and view the video streaming directly from Zoho Catalyst Cloud!
+5. Audiences and viewers can point their smartphone camera at the screen to scan the QR code and view the video streaming directly from MotionCap Cloud!

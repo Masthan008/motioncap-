@@ -93,6 +93,10 @@ export function renderCaptions(
 
 			ctx.save();
 			ctx.translate(cursorX, lineY);
+			if (!visualState.isInactive && word.state === "active") {
+				ctx.shadowColor = "rgba(0, 240, 255, 0.5)";
+				ctx.shadowBlur = 6;
+			}
 			ctx.fillStyle = visualState.isInactive
 				? settings.inactiveTextColor
 				: settings.textColor;

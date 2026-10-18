@@ -176,12 +176,36 @@ function useTimelineLaneHover({
 		event.stopPropagation();
 	}, []);
 
+	const reset = useCallback(() => {
+		setIsHovered(false);
+		setHoverMs(null);
+	}, []);
+
+	const clampedHoverMs =
+		hoverMs === null ? null : Math.max(0, Math.min(hoverMs, videoDurationMs));
+
+	const isNearTransition = Boolean(
+		clampedHoverMs !== null &&
+			clipPresentation &&
+			clipPresentation.length > 1 &&
+			clipPresentation.some((clip) => {
+				const isSeam = clipPresentation.some((c) => c.span.end === clip.span.start);
+				return isSeam && Math.abs(clampedHoverMs - clip.span.start) <= 300;
+			}),
+	);
+
 	const onClick = useCallback(
 		(event: MouseEvent<HTMLDivElement>) => {
 			event.stopPropagation();
 			// Respect the lane's enabled flag so a hidden ghost can't still add on click.
 			if (!enabled || isDragging || !onAddAtMs || event.button !== 0) return;
-			if ((event.target as HTMLElement).closest("[data-timeline-item]")) return;
+			const target = event.target as HTMLElement;
+			if (
+				target.closest("[data-timeline-item]") ||
+				target.closest("[data-testid='clip-seam-grip']")
+			) {
+				return;
+			}
 			const rect = event.currentTarget.getBoundingClientRect();
 			if (rect.width <= 0) return;
 			const x = direction === "rtl" ? rect.right - event.clientX : event.clientX - rect.left;
@@ -192,6 +216,15 @@ function useTimelineLaneHover({
 				),
 				clipPresentation ?? [],
 			);
+			const nearSeam = Boolean(
+				clipPresentation &&
+					clipPresentation.length > 1 &&
+					clipPresentation.some((clip) => {
+						const isSeam = clipPresentation.some((c) => c.span.end === clip.span.start);
+						return isSeam && Math.abs(startMs - clip.span.start) <= 300;
+					}),
+			);
+			if (nearSeam) return;
 			if (canPlaceAtMs && !canPlaceAtMs(startMs)) return;
 			onAddAtMs(startMs);
 		},
@@ -208,13 +241,6 @@ function useTimelineLaneHover({
 		],
 	);
 
-	const reset = useCallback(() => {
-		setIsHovered(false);
-		setHoverMs(null);
-	}, []);
-
-	const clampedHoverMs =
-		hoverMs === null ? null : Math.max(0, Math.min(hoverMs, videoDurationMs));
 	// When a resolver is supplied, preview the exact span the add would create (clamped to
 	// the next item / end of timeline); otherwise fall back to a fixed-length ghost.
 	const resolvedSpan =
@@ -234,6 +260,7 @@ function useTimelineLaneHover({
 	const ghostWidthPx = Math.max(18, ghostEndOffsetPx - ghostStartOffsetPx);
 	const canShowGhost =
 		!isDragging &&
+		!isNearTransition &&
 		enabled &&
 		isHovered &&
 		ghostStartMs !== null &&
@@ -242,6 +269,7 @@ function useTimelineLaneHover({
 			: onAddAtMs
 				? (canPlaceAtMs?.(ghostStartMs) ?? true)
 				: false);
+
 
 	return {
 		reset,
@@ -740,9 +768,13 @@ const TimelineCanvasRows = memo(function TimelineCanvasRows({
 							data-testid="clip-seam-grip"
 							aria-hidden="true"
 							className={cn(glassStyles.zoomEndCap, glassStyles.clipHandle)}
+							onClick={(e) => e.stopPropagation()}
+							onMouseDown={(e) => e.stopPropagation()}
+							onPointerDown={(e) => e.stopPropagation()}
 							style={{
 								height: "59.5%",
-								pointerEvents: "none",
+								pointerEvents: "auto",
+								cursor: "default",
 								[direction === "rtl" ? "right" : "left"]:
 									valueToPixels(seam - rangeStart) - 2,
 							}}

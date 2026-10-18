@@ -4,8 +4,8 @@ from PIL import Image
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, ".."))
 
-LOGO_PATH = r"C:\Users\masth\.gemini\antigravity-ide\brain\f8fc11c1-c064-4c90-b959-800a7ea5c003\motioncap_logo_1791121724498.jpg"
-FAVICON_PATH = r"C:\Users\masth\.gemini\antigravity-ide\brain\f8fc11c1-c064-4c90-b959-800a7ea5c003\motioncap_favicon_1791121754131.jpg"
+LOGO_PATH = r"C:\Users\masth\.gemini\antigravity-ide\brain\3c72b866-c1bc-48bd-a698-a6037a56e5c3\motioncap_liquid_glass_icon_1792039677655.jpg"
+FAVICON_PATH = r"C:\Users\masth\.gemini\antigravity-ide\brain\3c72b866-c1bc-48bd-a698-a6037a56e5c3\motioncap_liquid_glass_fav_1792039703109.jpg"
 
 print(f"Loading logo: {LOGO_PATH}")
 logo_img = Image.open(LOGO_PATH).convert("RGBA")
@@ -53,14 +53,28 @@ logo_img.resize((1024, 1024), Image.Resampling.LANCZOS).save(
     os.path.join(branding_assets, "motioncapmac.png"), "PNG", optimize=True
 )
 
-# 4. Generate Windows ICO: icons/icons/win/icon.ico (with multi-sizes: 16, 24, 32, 48, 64, 128, 256)
+# 4. Generate Windows ICO: icons/icons/win/icon.ico, public/app-icons/motioncap.ico, build/icon.ico
 ico_sizes = [(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]
 win_ico_path = os.path.join(icons_win, "icon.ico")
 logo_img.save(win_ico_path, format="ICO", sizes=ico_sizes)
 print(f"Saved Windows App Icon: {win_ico_path}")
 
+app_icon_ico = os.path.join(public_app_icons, "motioncap.ico")
+logo_img.save(app_icon_ico, format="ICO", sizes=ico_sizes)
+print(f"Saved Public App Icon ICO: {app_icon_ico}")
+
+build_dir = os.path.join(PROJECT_ROOT, "build")
+os.makedirs(build_dir, exist_ok=True)
+build_ico = os.path.join(build_dir, "icon.ico")
+logo_img.save(build_ico, format="ICO", sizes=ico_sizes)
+print(f"Saved Build Icon ICO: {build_ico}")
+
+build_png = os.path.join(build_dir, "icon.png")
+logo_img.resize((512, 512), Image.Resampling.LANCZOS).save(build_png, "PNG", optimize=True)
+print(f"Saved Build Icon PNG: {build_png}")
+
 # 5. Generate Favicons: public/favicon.ico and public/favicon.png
-fav_ico_sizes = [(16, 16), (32, 32), (48, 48)]
+fav_ico_sizes = [(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]
 fav_ico_path = os.path.join(public_dir, "favicon.ico")
 fav_img.save(fav_ico_path, format="ICO", sizes=fav_ico_sizes)
 print(f"Saved Favicon ICO: {fav_ico_path}")
@@ -76,3 +90,4 @@ logo_512.save(logo_png_path, "PNG", optimize=True)
 print(f"Saved Public Logo PNG: {logo_png_path}")
 
 print("All MotionCap icon assets successfully processed and saved!")
+

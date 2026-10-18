@@ -374,8 +374,11 @@ export default function Item({
 					{/* Scene transition badge on incoming clip seam */}
 					{isClip && transition && transition.type !== "none" && (
 						<div
-							className="absolute left-1.5 top-1.5 z-20 flex items-center gap-1 rounded bg-black/75 px-1.5 py-0.5 text-[10px] font-medium text-amber-300 shadow border border-amber-400/30 backdrop-blur-sm pointer-events-none select-none"
+							className="absolute left-1.5 top-1.5 z-20 flex items-center gap-1 rounded bg-black/75 px-1.5 py-0.5 text-[10px] font-medium text-amber-300 shadow border border-amber-400/30 backdrop-blur-sm pointer-events-auto select-none cursor-default"
 							title={`Transition: ${getClipTransitionShortLabel(transition.type)} (${((transition.durationMs ?? 500) / 1000).toFixed(1)}s)`}
+							onMouseDown={(e) => e.stopPropagation()}
+							onClick={(e) => e.stopPropagation()}
+							onPointerDown={(e) => e.stopPropagation()}
 						>
 							<ArrowsMerge className="w-3 h-3 text-amber-400 shrink-0" />
 							<span className="hidden sm:inline">{getClipTransitionShortLabel(transition.type)}</span>

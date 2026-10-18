@@ -1,11 +1,9 @@
 import { demoUser, hasDemoSession, subscribeDemoSession } from "@/lib/auth/demoSession";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { onAuthStateChanged } from "firebase/auth";
 import {
-	adaptFirebaseUser,
 	completeAuthCallback,
-	firebaseAuth,
 	motioncapAuthConfigured,
+	subscribeAuthState,
 	type User,
 } from "@/lib/auth/motioncapAuth";
 
@@ -13,32 +11,17 @@ export function useMotionCapAuth() {
 	const demo = useSyncExternalStore(subscribeDemoSession, hasDemoSession, () => false);
 	const [user, setUser] = useState<User | null>(null);
 	const [accessToken, setAccessToken] = useState<string>();
-	const [loading, setLoading] = useState(motioncapAuthConfigured);
+	const [loading, setLoading] = useState(false);
 	const [callbackError, setCallbackError] = useState<string>();
 	const callbackUrl = useRef<string | undefined>(undefined);
 
 	useEffect(() => {
-		if (!firebaseAuth) {
-			setLoading(false);
-			return;
-		}
-
 		let mounted = true;
-		const unsubscribeAuth = onAuthStateChanged(firebaseAuth, async (fbUser) => {
+
+		const unsubscribeAuth = subscribeAuthState((nextUser, nextToken) => {
 			if (!mounted) return;
-			if (fbUser) {
-				const adapted = adaptFirebaseUser(fbUser);
-				setUser(adapted);
-				try {
-					const token = await fbUser.getIdToken();
-					if (mounted) setAccessToken(token);
-				} catch {
-					if (mounted) setAccessToken(undefined);
-				}
-			} else {
-				setUser(null);
-				setAccessToken(undefined);
-			}
+			setUser(nextUser);
+			setAccessToken(nextToken);
 			setLoading(false);
 		});
 

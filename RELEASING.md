@@ -95,6 +95,30 @@ That is the normal path if you want “click new release and let CI do the rest.
 
 If you need to rerun publishing for an existing tag, use the manual dispatch for `.github/workflows/release.yml` and provide the existing tag.
 
+## Windows Unpacked Distribution (Direct Executable)
+
+For local distribution, USB drive demonstrations, and running MotionCap without installer friction:
+
+```bash
+npm run build:win:unpacked
+```
+
+This compiles:
+- Frontend static bundle into `dist/`
+- Electron main process into `dist-electron/`
+- Unpacked Windows release into `release/win-unpacked/MotionCap.exe`
+
+All native binaries (`ffmpeg.exe`, `ffprobe.exe`, `uiohook.node`, `wgc-record.exe`) are bundled and ready for execution.
+
+## In-App Auto-Update Verification
+
+MotionCap features an embedded real-time update indicator in the Editor Header:
+- **Idle/Up-to-date**: Shows green indicator with current version `v1.4.0`.
+- **Checking**: Polls GitHub releases from `https://github.com/Masthan008/motioncap-`.
+- **Available**: Prompts user with "Update Available" badge.
+- **Downloading**: Displays progress with animated amber badge.
+- **Ready**: Prompts user to restart to apply the new version.
+
 ## Notes
 
 - macOS auto-updates require the `zip` target in addition to `dmg`, because `latest-mac.yml` is generated from the zipped build.

@@ -727,7 +727,11 @@ export async function checkForAppUpdates(
 	writeUpdaterLog(`Starting ${manualCheckRequested ? "manual" : "automatic"} update check.`);
 
 	try {
-		await autoUpdater.checkForUpdates();
+		const checkPromise = autoUpdater.checkForUpdates();
+		const timeoutPromise = new Promise((_, reject) =>
+			setTimeout(() => reject(new Error("Update check timed out after 4 seconds")), 4000),
+		);
+		await Promise.race([checkPromise, timeoutPromise]);
 		writeUpdaterLog("Update check request completed.");
 	} catch (error) {
 		updateCheckInProgress = false;

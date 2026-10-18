@@ -17,6 +17,7 @@ import {
 	Alert,
 } from "@heroui/react";
 import {
+	openAuthPortal,
 	sendPasswordReset,
 	signInWithEmail,
 	signInWithSocial,
@@ -185,11 +186,15 @@ export function MotionCapSignInDialog({
 											<img
 												src={`${import.meta.env.BASE_URL}app-icons/motioncap-128.png`}
 												alt=""
-												className="size-12 rounded-xl"
+												className="size-12 rounded-xl shadow-lg border border-white/10"
 											/>
 											<span className="text-3xl font-semibold tracking-tight">
 												MotionCap
 											</span>
+										</div>
+										<div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-semibold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+											<span className="size-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+											MotionCap Cloud Secure Auth
 										</div>
 										<Modal.Heading className="whitespace-nowrap text-[clamp(12px,5cqw,22px)] font-semibold leading-tight tracking-tight">
 											{user
@@ -355,6 +360,15 @@ export function MotionCapSignInDialog({
 												)}
 											</AnimatePresence>
 										</Form>
+										<div className="text-center pt-1">
+											<button
+												type="button"
+												onClick={() => void openAuthPortal()}
+												className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors underline underline-offset-4 bg-transparent border-0 cursor-pointer"
+											>
+												Open Web Login & Sign-Up Portal ↗
+											</button>
+										</div>
 									</>
 								)}
 								{message || callbackError ? (

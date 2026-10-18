@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MotionCap Studio — Sign In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a0f;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-glow: rgba(99, 102, 241, 0.35);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --input-bg: rgba(255, 255, 255, 0.06);
+      --input-border: rgba(255, 255, 255, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, var(--bg) 70%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 36px 32px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px var(--accent-glow);
+      text-align: center;
+      position: relative;
+    }
+    .brand-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .brand-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(168, 85, 247, 0.4));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+    .brand-logo svg {
+      width: 32px;
+      height: 32px;
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 2;
+    }
+    .brand-name {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 40%, #c7d2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #a5b4fc;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+    .tab-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--input-border);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 24px;
+      gap: 4px;
+    }
+    .tab-btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    .social-btn {
+      width: 100%;
+      height: 44px;
+      border: 1px solid var(--input-border);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 12px;
+    }
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+    .social-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+      color: #6b7280;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #d1d5db;
+      margin-bottom: 6px;
+    }
+    .form-input {
+      width: 100%;
+      height: 42px;
+      padding: 0 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .form-input:focus {
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.09);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .primary-btn {
+      width: 100%;
+      height: 44px;
+      background: linear-gradient(135deg, var(--accent), #8b5cf6);
+      border: none;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px var(--accent-glow);
+      margin-top: 8px;
+    }
+    .primary-btn:hover {
+      background: linear-gradient(135deg, var(--accent-hover), #7c3aed);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    .primary-btn:active {
+      transform: translateY(0);
+    }
+    .message-banner {
+      display: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .message-banner.success {
+      display: block;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
+    .message-banner.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+    .footer-text {
+      margin-top: 24px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      color: #34d399;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <div class="brand-header">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M10 8l6 4-6 4V8z"/>
+        </svg>
+      </div>
+      <div class="brand-name">MotionCap</div>
+      <div class="brand-badge">
+        <span class="badge-dot"></span>
+        MotionCap Cloud Secure Auth
+      </div>
+    </div>
+
+    <div id="messageBanner" class="message-banner"></div>
+
+    <div id="authContent">
+      <div class="tab-container">
+        <button type="button" class="tab-btn active" id="tabSignIn" onclick="switchTab('signin')">Sign In</button>
+        <button type="button" class="tab-btn" id="tabSignUp" onclick="switchTab('signup')">Create Account</button>
+      </div>
+
+      <button type="button" class="social-btn" onclick="handleSocial('google')">
+        <svg viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <button type="button" class="social-btn" onclick="handleSocial('azure')">
+        <svg viewBox="0 0 24 24">
+          <path fill="#F25022" d="M1 1h10v10H1z"/>
+          <path fill="#7FBA00" d="M13 1h10v10H13z"/>
+          <path fill="#00A4EF" d="M1 13h10v10H1z"/>
+          <path fill="#FFB900" d="M13 13h10v10H13z"/>
+        </svg>
+        Continue with Microsoft
+      </button>
+
+      <div class="divider">or continue with email</div>
+
+      <form id="authForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group" id="nameGroup" style="display: none;">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="nameInput" class="form-input" placeholder="e.g. Alex Rivera">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="emailInput" class="form-input" placeholder="alex@company.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="passwordInput" class="form-input" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" id="submitBtn" class="primary-btn">Sign In to MotionCap</button>
+      </form>
+    </div>
+
+    <div id="successScreen" class="success-screen">
+      <div class="success-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Authentication Successful</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;" id="successDesc">
+        Redirecting back to MotionCap Studio desktop app...
+      </p>
+      <button type="button" class="primary-btn" onclick="launchAppDirectly()" id="launchBtn">
+        Open MotionCap Studio
+      </button>
+    </div>
+
+    <div class="footer-text">
+      MotionCap Studio • Secure Desktop Presentation Platform
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectUrl = urlParams.get('redirect_url') || 'motioncap://auth-callback';
+    const prefillEmail = urlParams.get('email');
+    let currentTab = 'signin';
+    let authCallbackUrl = '';
+
+    if (prefillEmail) {
+      document.getElementById('emailInput').value = prefillEmail;
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      const tabSignIn = document.getElementById('tabSignIn');
+      const tabSignUp = document.getElementById('tabSignUp');
+      const nameGroup = document.getElementById('nameGroup');
+      const submitBtn = document.getElementById('submitBtn');
+
+      if (tab === 'signup') {
+        tabSignUp.classList.add('active');
+        tabSignIn.classList.remove('active');
+        nameGroup.style.display = 'block';
+        submitBtn.textContent = 'Create MotionCap Account';
+      } else {
+        tabSignIn.classList.add('active');
+        tabSignUp.classList.remove('active');
+        nameGroup.style.display = 'none';
+        submitBtn.textContent = 'Sign In to MotionCap';
+      }
+    }
+
+    function showBanner(text, type) {
+      const banner = document.getElementById('messageBanner');
+      banner.textContent = text;
+      banner.className = 'message-banner ' + type;
+    }
+
+    function generateMockToken(email) {
+      const payload = {
+        sub: 'usr_' + Math.random().toString(36).substring(2, 10),
+        email: email,
+        exp: Date.now() + 86400000,
+      };
+      return 'mc_' + btoa(JSON.stringify(payload)).replace(/=/g, '');
+    }
+
+    function handleSocial(provider) {
+      const email = provider + '.user@motioncap.dev';
+      completeAuth(email, provider);
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('emailInput').value.trim();
+      const password = document.getElementById('passwordInput').value;
+
+      if (!email || !password) {
+        showBanner('Please fill in both email and password.', 'error');
+        return;
+      }
+      completeAuth(email, 'email');
+    }
+
+    function completeAuth(email, provider) {
+      const token = generateMockToken(email);
+      const targetUrl = new URL(redirectUrl);
+      targetUrl.searchParams.set('token', token);
+      targetUrl.searchParams.set('email', email);
+      targetUrl.searchParams.set('provider', provider);
+
+      authCallbackUrl = targetUrl.toString();
+
+      document.getElementById('authContent').style.display = 'none';
+      document.getElementById('messageBanner').style.display = 'none';
+      document.getElementById('successScreen').style.display = 'block';
+
+      // Attempt deep-link redirection to MotionCap desktop app
+      try {
+        window.location.href = authCallbackUrl;
+      } catch (e) {
+        console.warn('Direct redirect failed:', e);
+      }
+    }
+
+    function launchAppDirectly() {
+      if (authCallbackUrl) {
+        window.location.href = authCallbackUrl;
+      }
+    }
+  </script>
+</body>
+</html>
